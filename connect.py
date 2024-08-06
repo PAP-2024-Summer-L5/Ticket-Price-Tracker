@@ -1,8 +1,8 @@
 import requests
 import json
 
-API_KEY = '	ATw9QKARBdcfpEAvauJQc5Gd3V5v7gPz'
-BASE_URL = 'https://app.ticketmaster.com/discovery/v2/'
+API_KEY = 'ATw9QKARBdcfpEAvauJQc5Gd3V5v7gPz'
+DISCOVERY = 'https://app.ticketmaster.com/discovery/v2/'
 
 def search_events(artist, stateCode, countryCode):
     endpoint = 'events.json'
@@ -14,15 +14,17 @@ def search_events(artist, stateCode, countryCode):
         'locale': 'en-us'
     }
     
-    response =  requests.get(BASE_URL + endpoint, params)
-
+    response =  requests.get(DISCOVERY + endpoint, params)
     print(response.status_code)
     return response.json()
 
-events = search_events('Laufey', 'MD', 'US')
-if events:
-    print(events)
+# Event search
+data = search_events('Laufey', 'CO', 'US')
 
 # Save JSON data to a file
 with open('events_data.json', 'w') as file:
-    json.dump(events, file, indent=4)  # indent=4 for pretty printing
+    json.dump(data, file, indent=4)  # indent=4 for pretty printing
+
+# Retrieving ID    
+id = data['_embedded']['events'][0]['id']
+print(id)

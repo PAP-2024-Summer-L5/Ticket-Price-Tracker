@@ -5,6 +5,9 @@ ul {
   overflow: hidden;
   background-color: #000;
 }
+header{
+  background-color: #000;
+}
 
 li {
   float: left;

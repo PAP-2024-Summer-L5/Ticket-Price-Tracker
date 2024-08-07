@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Lynn Schirmer for CFA 2023">
+    <title>Create an Event</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to the custom CSS file -->
+</head>
+
+<body>
+    <header>
+        <h1>Create an Event</h1>
+    </header>
+    <main>
+        <form id="event-form">
+            <div class="field">
+                <label for="event-name" class="label">Event Name</label>
+                <div class="control">
+                    <input type="text" id="event-name" class="input" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="event-date" class="label">Date</label>
+                <div class="control">
+                    <input type="date" id="event-date" class="input" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="event-time" class="label">Time</label>
+                <div class="control">
+                    <input type="time" id="event-time" class="input" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="event-location" class="label">Location</label>
+                <div class="control">
+                    <input type="text" id="event-location" class="input" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="event-description" class="label">Description</label>
+                <div class="control">
+                    <textarea id="event-description" class="textarea" required></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label for="event-photo" class="label">Upload Photo</label>
+                <div class="control">
+                    <input type="file" id="event-photo" class="input" accept="image/*">
+                </div>
+            </div>
+            <div class="control">
+                <button type="submit" class="button is-primary">Create Event</button>
+            </div>
+        </form>
+        <section>
+            <h2 class="title">Upcoming Events</h2>
+            <ul id="event-list">
+                <!-- Events will be listed here -->
+            </ul>
+        </section>
+        <nav>
+            <a href="events.html" class="button is-link">View All Events</a>
+        </nav>
+    </main>
+    <script src="main.js"></script>
+</body>
+
+</html>

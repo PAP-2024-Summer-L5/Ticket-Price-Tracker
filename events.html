@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jam Pass</title>
-    <link rel = "stylesheet" href="finalproject.css">
-   
+    <title>Available Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="location.html">Location</a></li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="artist.html">Artists</a></li>
-            <li><a href =>Support</a></li>
-            <li><a href="aboutus.html">About us</a></li>
-        </ul>
+        <h1>Available Events</h1>
     </header>
     <main>
-        <form role="search" id="form">
-            <input type="search" id="query" name="q"
-             placeholder="Events"
-             aria-label="Search through site content">
-            <button>
-              <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
-            </button>
-          </form>
+        <section>
+            <div class="filter">
+                <input type="text" id="user-location" placeholder="Enter your location">
+                <input type="date" id="filter-date">
+                <button id="filter-button" class="button is-primary">Filter Events</button>
+            </div>
+            <ul id="event-list" class="grid">
+                <!-- Events will be listed here -->
+            </ul>
+        </section>
+        <nav>
+            <a href="createEvents.html" class="button is-link">Create New Event</a>
+        </nav>
     </main>
-    <footer>
-        <p>Trade Mark @ Jam Pass</p>
-    </footer>
-    
-    
+    <script src="events.js"></script>
 </body>
+
 </html>

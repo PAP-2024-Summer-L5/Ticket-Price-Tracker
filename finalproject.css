@@ -80,3 +80,36 @@ svg {
   height: 24px;
   padding: 10px;
 }
+#logo{
+color:#fff;
+font-size: 88px;
+}
+#paragraph{
+  color:#fff;
+  font-size: 35px;
+  margin-top:0px;
+  margin-bottom:0px;
+  margin-left:100px;
+  font-family:"Montserrat";
+  width:800px;
+}
+#filter{
+  color:#fff;
+  font-size: 88px;
+  margin-top: 500px;
+}
+
+#location-image{
+  width:350px;
+  height: 120px;
+
+}
+#events-image{
+  width: 350px;
+  height: 120px;
+}
+#artist-image{
+  width: 350px;
+  height: 120px;
+}
+

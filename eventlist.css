@@ -37,11 +37,12 @@ button {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* Creates 5 equal columns */
     gap: 20px;
     list-style: none;
     padding: 0;
 }
+
 
 .grid li {
     border: 1px solid #ccc;

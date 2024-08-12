@@ -5,33 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Events</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="bulma.min.css">
-    <link rel="stylesheet" href="eventlist.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="eventlist.css"> <!-- Your custom styles (if any) -->
 </head>
 <body>
-    <header>
-        <h1>Available Events</h1>
-    </header>
-    <main>
-        <section>
-            <div class="filter">
-                <input type="text" id="user-location" placeholder="Enter your location">
-                <input type="date" id="filter-date">
-                <button id="filter-button" class="button is-primary">Filter Events</button>
-            </div>
-            <ul id="event-list" class="grid">
-                <!-- Events will be listed here -->
-            </ul>
-        </section>
-        <nav>
-            <a href="createEvents.html" class="button is-link">Create New Event</a>
-        </nav>
-    </main>
-    <!-- Include the new events.js script -->
+    <div class="container">
+        <header class="text-center my-4">
+            <h1>Available Events</h1>
+        </header>
+        <main class="row">
+            <section class="col-md-8">
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <input type="text" id="user-location" class="form-control" placeholder="Enter your location">
+                    </div>
+                    <div class="col">
+                        <input type="date" id="filter-date" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button id="filter-button" class="btn btn-primary btn-block">Filter Events</button>
+                    </div>
+                </div>
+                <ul id="event-list" class="row list-unstyled">
+                    <!-- Events will be listed here -->
+                </ul>
+            </section>
+            <nav class="col-md-4">
+                <a href="createEvents.html" class="btn btn-link btn-block">Create New Event</a>
+            </nav>
+        </main>
+    </div>
     <script src="events.js"></script>
 </body>
-
 </html>
+

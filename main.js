@@ -69,11 +69,4 @@ document.addEventListener("DOMContentLoaded", () => {
         eventList.appendChild(eventItem);
     };
 
-    // Load and display events from localStorage on page load
-    const loadEvents = () => {
-        const events = JSON.parse(localStorage.getItem('events')) || [];
-        events.forEach(event => displayEvent(event));
-    };
-
-    loadEvents();
 });

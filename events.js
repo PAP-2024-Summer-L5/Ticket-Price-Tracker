@@ -15,57 +15,57 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching events:', error));
     };
 
- // Display events in a grid
-const displayEvents = (events) => {
-    eventList.innerHTML = ''; // Clear existing events
-    events.forEach(event => {
-        const li = document.createElement('li');
-        li.className = 'col-md-3 mb-4';  // Bootstrap class for responsive columns
+    // Display events in a grid
+    const displayEvents = (events) => {
+        eventList.innerHTML = '';
+        events.forEach(event => {
+            const li = document.createElement('li');
+            li.className = 'col-lg-4 col-md-6 mb-4'; // Bootstrap classes
 
-        const card = document.createElement('div');
-        card.className = 'card h-100';
+            const card = document.createElement('div');
+            card.className = 'card h-100';
 
-        const img = document.createElement('img');
-        img.src = event.images[0].url;
-        img.className = 'card-img-top';
-        card.appendChild(img);
+            const img = document.createElement('img');
+            img.src = event.images[0].url;
+            img.alt = event.name;
+            img.className = 'card-img-top';
+            card.appendChild(img);
 
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
 
-        const name = document.createElement('h5');
-        name.className = 'card-title';
-        name.textContent = event.name;
-        cardBody.appendChild(name);
+            const name = document.createElement('h5');
+            name.className = 'card-title';
+            name.textContent = event.name;
+            cardBody.appendChild(name);
 
-        const date = document.createElement('p');
-        date.className = 'card-text';
-        date.textContent = `Date: ${event.dates.start.localDate}`;
-        cardBody.appendChild(date);
+            const date = document.createElement('p');
+            date.className = 'card-text';
+            date.textContent = `Date: ${event.dates.start.localDate}`;
+            cardBody.appendChild(date);
 
-        const time = document.createElement('p');
-        time.className = 'card-text';
-        time.textContent = `Time: ${event.dates.start.localTime}`;
-        cardBody.appendChild(time);
+            const time = document.createElement('p');
+            time.className = 'card-text';
+            time.textContent = `Time: ${event.dates.start.localTime}`;
+            cardBody.appendChild(time);
 
-        const venue = document.createElement('p');
-        venue.className = 'card-text';
-        venue.textContent = `Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.name}`;
-        cardBody.appendChild(venue);
+            const venue = document.createElement('p');
+            venue.className = 'card-text';
+            venue.textContent = `Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.name}`;
+            cardBody.appendChild(venue);
 
-        const url = document.createElement('a');
-        url.href = event.url;
-        url.className = 'btn btn-primary';
-        url.textContent = "Buy Tickets";
-        url.target = "_blank";
-        cardBody.appendChild(url);
+            const url = document.createElement('a');
+            url.href = event.url;
+            url.className = 'btn btn-primary';
+            url.textContent = "Buy Tickets";
+            url.target = "_blank";
+            cardBody.appendChild(url);
 
-        card.appendChild(cardBody);
-        li.appendChild(card);
-        eventList.appendChild(li);
-    });
-};
-
+            card.appendChild(cardBody);
+            li.appendChild(card);
+            eventList.appendChild(li);
+        });
+    };
 
     // Filter events by location and date
     const filterEvents = () => {
@@ -77,8 +77,10 @@ const displayEvents = (events) => {
             .then(data => {
                 let events = data._embedded.events;
                 events = events.filter(event => {
-                    const eventLocation = event._embedded.venues[0].city.name.toLowerCase();
-                    const isLocationMatch = userLocation ? eventLocation.includes(userLocation) : true;
+                    const venue = event._embedded.venues[0];
+                    const city = venue.city.name.toLowerCase();
+                    const state = venue.state.name.toLowerCase();
+                    const isLocationMatch = userLocation ? city.includes(userLocation) || state.includes(userLocation) : true;
                     const isDateMatch = filterDate ? event.dates.start.localDate === filterDate : true;
                     return isLocationMatch && isDateMatch;
                 });

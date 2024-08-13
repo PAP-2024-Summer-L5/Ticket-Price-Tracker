@@ -1,4 +1,26 @@
-body {
+.card-body {
+    text-align: left;
+}
+
+.row {
+    padding-top: 60px;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+/* Expiremental coding below */
+/* body {
     font-family: 'Lato', sans-serif;
 }
 
@@ -37,12 +59,12 @@ button {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Creates 5 equal columns */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     list-style: none;
     padding: 0;
-}
-
+} */
+/* 
 
 .grid li {
     border: 1px solid #ccc;
@@ -74,4 +96,4 @@ button {
 
 .filter button {
     flex-shrink: 0;
-}
+} */

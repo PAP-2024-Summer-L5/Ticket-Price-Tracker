@@ -46,10 +46,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const saveEvent = (event) => {
-        const events = JSON.parse(localStorage.getItem('events')) || [];
-        events.push(event);
-        localStorage.setItem('events', JSON.stringify(events));
+        fetch('/api/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(event)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Event saved:', data);
+            displayEvent(event);
+        })
+        .catch(error => console.error('Error saving event:', error));
     };
+    
 
     const displayEvent = (event) => {
         const eventItem = document.createElement('li');

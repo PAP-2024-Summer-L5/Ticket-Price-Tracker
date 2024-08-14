@@ -1,123 +1,96 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const eventList = document.getElementById('event-list');
-
-    const displayEvent = (event) => {
-        const eventItem = document.createElement('li');
-        eventItem.innerHTML = `
-            <strong>${event.name}</strong><br>
-            <em>${event.date} at ${event.time}</em><br>
-            <span>${event.location}</span><br>
-            <p>${event.description}</p>
-        `;
-        if (event.photo) {
-            const img = document.createElement('img');
-            img.src = event.photo;
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
-            eventItem.appendChild(img);
-        }
-        eventList.appendChild(eventItem);
-    };
-
-    // Load and display events from localStorage on page load
-    const loadEvents = () => {
-        const events = JSON.parse(localStorage.getItem('events')) || [];
-        events.forEach(event => displayEvent(event));
-    };
-
-    loadEvents();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function () {
     const eventList = document.getElementById('event-list');
     const filterButton = document.getElementById('filter-button');
     const userLocationInput = document.getElementById('user-location');
     const filterDateInput = document.getElementById('filter-date');
 
-    const displayEvent = (event) => {
-        const eventItem = document.createElement('li');
-        eventItem.innerHTML = `
-            <strong>${event.name}</strong><br>
-            <em>${event.date} at ${event.time}</em><br>
-            <span>${event.location}</span><br>
-            <p>${event.description}</p>
-        `;
-        if (event.photo) {
+    // Fetch events data from the Ticketmaster API
+    const fetchEvents = () => {
+        fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=WGglwpWGVQbbLvFl9Ugw2niwCCWQ34sZ&size=50')
+            .then(response => response.json())
+            .then(data => {
+                const events = data._embedded.events;
+                displayEvents(events);
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    };
+
+    // Display events in a grid
+    const displayEvents = (events) => {
+        eventList.innerHTML = '';
+        events.forEach(event => {
+            const li = document.createElement('li');
+            li.className = 'col-lg-4 col-md-6 mb-4'; // Bootstrap classes
+
+            const card = document.createElement('div');
+            card.className = 'card h-100';
+
             const img = document.createElement('img');
-            img.src = event.photo;
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
-            eventItem.appendChild(img);
-        }
-        eventList.appendChild(eventItem);
+            img.src = event.images[0].url;
+            img.alt = event.name;
+            img.className = 'card-img-top';
+            card.appendChild(img);
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            const name = document.createElement('h5');
+            name.className = 'card-title';
+            name.textContent = event.name;
+            cardBody.appendChild(name);
+
+            const date = document.createElement('p');
+            date.className = 'card-text';
+            date.textContent = `Date: ${event.dates.start.localDate}`;
+            cardBody.appendChild(date);
+
+            const time = document.createElement('p');
+            time.className = 'card-text';
+            time.textContent = `Time: ${event.dates.start.localTime}`;
+            cardBody.appendChild(time);
+
+            const venue = document.createElement('p');
+            venue.className = 'card-text';
+            venue.textContent = `Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.name}`;
+            cardBody.appendChild(venue);
+
+            const url = document.createElement('a');
+            url.href = event.url;
+            url.className = 'btn btn-primary';
+            url.textContent = "Buy Tickets";
+            url.target = "_blank";
+            cardBody.appendChild(url);
+
+            card.appendChild(cardBody);
+            li.appendChild(card);
+            eventList.appendChild(li);
+        });
     };
 
-    // Load and display events from localStorage on page load
-    const loadEvents = () => {
-        const events = JSON.parse(localStorage.getItem('events')) || [];
-        events.forEach(event => displayEvent(event));
-    };
-
+    // Filter events by location and date
     const filterEvents = () => {
         const userLocation = userLocationInput.value.toLowerCase();
         const filterDate = filterDateInput.value;
 
-        const events = JSON.parse(localStorage.getItem('events')) || [];
-        const filteredEvents = events.filter(event => {
-            const eventLocation = event.location.toLowerCase();
-            const isLocationMatch = userLocation ? eventLocation.includes(userLocation) : true;
-            const isDateMatch = filterDate ? event.date === filterDate : true;
-            return isLocationMatch && isDateMatch;
-        });
-
-        // Clear the current list
-        eventList.innerHTML = '';
-        filteredEvents.forEach(event => displayEvent(event));
+        fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=WGglwpWGVQbbLvFl9Ugw2niwCCWQ34sZ&size=50')
+            .then(response => response.json())
+            .then(data => {
+                let events = data._embedded.events;
+                events = events.filter(event => {
+                    const venue = event._embedded.venues[0];
+                    const city = venue.city.name.toLowerCase();
+                    const state = venue.state.name.toLowerCase();
+                    const isLocationMatch = userLocation ? city.includes(userLocation) || state.includes(userLocation) : true;
+                    const isDateMatch = filterDate ? event.dates.start.localDate === filterDate : true;
+                    return isLocationMatch && isDateMatch;
+                });
+                displayEvents(events);
+            })
+            .catch(error => console.error('Error filtering events:', error));
     };
 
     filterButton.addEventListener('click', filterEvents);
 
-    loadEvents();
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const eventList = document.getElementById('event-list');
-
-    fetch('events_data.json')
-        .then(response => response.json())
-        .then(data => {
-            const events = data._embedded.events;
-            events.forEach(event => {
-                const li = document.createElement('li');
-
-                const img = document.createElement('img');
-                img.src = event.images[0].url;
-                li.appendChild(img);
-
-                const name = document.createElement('h3');
-                name.textContent = event.name;
-                li.appendChild(name);
-
-                const date = document.createElement('p');
-                date.textContent = `Date: ${event.dates.start.localDate}`;
-                li.appendChild(date);
-
-                const time = document.createElement('p');
-                time.textContent = `Time: ${event.dates.start.localTime}`;
-                li.appendChild(time);
-
-                const venue = document.createElement('p');
-                venue.textContent = `Venue: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.name}`;
-                li.appendChild(venue);
-
-                const url = document.createElement('a');
-                url.href = event.url;
-                url.textContent = "Buy Tickets";
-                url.target = "_blank";
-                li.appendChild(url);
-
-                eventList.appendChild(li);
-            });
-        })
-        .catch(error => console.error('Error fetching events:', error));
+    // Load and display events on page load
+    fetchEvents();
 });

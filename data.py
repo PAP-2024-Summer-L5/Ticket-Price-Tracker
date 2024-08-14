@@ -22,19 +22,35 @@ def initialize(jsonfile):
     '''
     sql.execute(table)
 
-    # Insert the new event data
-    insert_query = '''
-        INSERT INTO creation ("Event Name", "Date", "Time", "Location", "Description", "Cost")
-        VALUES (?, ?, ?, ?, ?, ?)
+    # Check if the event already exists
+    check_query = '''
+        SELECT COUNT(*)
+        FROM creation
+        WHERE "Event Name" = ? AND "Date" = ? AND "Time" = ? AND "Location" = ?
     '''
-    sql.execute(insert_query, (
+    sql.execute(check_query, (
         event_data["eventName"], 
         event_data["date"], 
         event_data["time"], 
-        event_data["location"],
-        event_data["description"], 
-        None  # No cost provided, so set it to None
+        event_data["location"]
     ))
+    event_exists = sql.fetchone()[0]
+
+    if event_exists == 0:
+        # Insert the new event data
+        insert_query = '''
+            INSERT INTO creation ("Event Name", "Date", "Time", "Location", "Description", "Cost")
+            VALUES (?, ?, ?, ?, ?, ?)
+        '''
+        sql.execute(insert_query, (
+            event_data["eventName"], 
+            event_data["date"], 
+            event_data["time"], 
+            event_data["location"],
+            event_data["description"], 
+            None  # No cost provided, so set it to None
+        ))
+   
 
     # Display all records
     query = "SELECT * FROM creation"
@@ -48,3 +64,4 @@ with open('test.json', 'r') as file:
     data = json.load(file)
 
 initialize(data)
+

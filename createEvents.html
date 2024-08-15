@@ -15,53 +15,61 @@
 
 <body>
     <header>
-        <h1>Create an Event</h1>
+        <div class="nav-bar">
+            <a class="home" href="home.html">Jampass</a>
+            <nav>
+                <ul>
+                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="createEvents.html">Host Events</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
-        <form id="event-form">
-            <div class="field">
-                <label for="event-name" class="label">Event Name</label>
-                <div class="control">
-                    <input type="text" id="event-name" class="input" required>
+
+        <h2 id = "herosubheader"> </h2>
+
+        <div class="form-container">
+            <h1>Create an Event</h1>
+            <form id="event-form">
+                <div class="field">
+                    <label for="event-name" class="label">Event Name</label>
+                    <div class="control">
+                        <input type="text" id="event-name" class="input" required>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label for="event-date" class="label">Date</label>
-                <div class="control">
-                    <input type="date" id="event-date" class="input" required>
+                <div class="field">
+                    <label for="event-date" class="label">Date</label>
+                    <div class="control">
+                        <input type="date" id="event-date" class="input" required>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label for="event-time" class="label">Time</label>
-                <div class="control">
-                    <input type="time" id="event-time" class="input" required>
+                <div class="field">
+                    <label for="event-time" class="label">Time</label>
+                    <div class="control">
+                        <input type="time" id="event-time" class="input" required>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label for="event-location" class="label">Location</label>
-                <div class="control">
-                    <input type="text" id="event-location" class="input" required>
+                <div class="field">
+                    <label for="event-location" class="label">Location</label>
+                    <div class="control">
+                        <input type="text" id="event-location" class="input" required>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label for="event-description" class="label">Description</label>
-                <div class="control">
-                    <textarea id="event-description" class="textarea" required></textarea>
+                <div class="field">
+                    <label for="event-description" class="label">Description</label>
+                    <div class="control">
+                        <textarea id="event-description" class="textarea" required></textarea>
+                    </div>
                 </div>
-            </div>
-            <!-- <div class="field"> // This is for uploading photos 
-                <label for="event-photo" class="label">Upload Photo</label>
                 <div class="control">
-                    <input type="file" id="event-photo" class="input" accept="image/*">
+                    <button type="submit" class="button is-primary">Create Event</button>
                 </div>
-            </div> -->
-            <div class="control">
-                <button type="submit" class="button is-primary">Create Event</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </main>
     <script src="main.js"></script>
-    <script src ="app.js"></script>
 </body>
 
 </html>

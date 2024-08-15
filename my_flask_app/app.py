@@ -29,7 +29,7 @@ def submit():
     country = data.get('country')
     print(data)
     result = search_events(artist, state, country)
-    with open('events_data.json', 'w') as file:
+    with open('static/data/events_data.json', 'w') as file:
         json.dump(result, file, indent=4)  # indent=4 for pretty printing
 
     return result

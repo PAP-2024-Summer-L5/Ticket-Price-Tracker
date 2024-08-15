@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const fetchEvents = () => {
-        fetch('events_data.json')
+        fetch('/static/data/events_data.json')
             .then(response => response.json())
             .then(data => {
                 const events = data._embedded.events;
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const userVenue = userVenueInput.value.toLowerCase();
         const filterDate = filterDateInput.value;
 
-        fetch('events_data.json')
+        fetch('/static/data/events_data.json')
             .then(response => response.json())
             .then(data => {
                 let events = data._embedded.events;

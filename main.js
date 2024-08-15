@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // const reader = new FileReader();
         // reader.onload = function(e) {
-// This is the JSON - Constand data change to constant event - Include tri catch block in Const event - include in async function called post 
+// This is the JSON - Constan data change to constant event - Include tri catch block in Const event - include in async function called post 
 
 
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 time: eventTime,
                 location: eventLocation,
                 description: eventDescription
-                // photo: e.target.result //E is not defined- Also because we're not using FileReader - can't handle file updloads? 
+                // photo: e.target.result //E is not defined- Also because we're not using FileReader - can't handle file updloads
                 };
                 console.log("Event Data:", eventData);
 
@@ -67,4 +67,3 @@ document.addEventListener("DOMContentLoaded", () => {
             // console.log("Submit event listener added");
 
 })
-//=================================================================================================

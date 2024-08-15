@@ -1,33 +1,22 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function() {
     const eventList = document.getElementById('event-list');
     const filterButton = document.getElementById('filter-button');
-    const userLocationInput = document.getElementById('user-location');
-    const filterDateInput = document.getElementById('filter-date');
+    const userVenueInput = document.getElementById('user-venue');   
+    const filterDateInput = document.getElementById('filter-date'); 
 
-    // Fetch events data from the Ticketmaster API
-    const fetchEvents = () => {
-        fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=WGglwpWGVQbbLvFl9Ugw2niwCCWQ34sZ&size=50')
-            .then(response => response.json())
-            .then(data => {
-                const events = data._embedded.events;
-                displayEvents(events);
-            })
-            .catch(error => console.error('Error fetching events:', error));
-    };
-
-    // Display events in a grid
+    // Updated display function using Bootstrap grid and cards
     const displayEvents = (events) => {
-        eventList.innerHTML = '';
+        eventList.innerHTML = ''; // Clear previous events
         events.forEach(event => {
             const li = document.createElement('li');
-            li.className = 'col-lg-4 col-md-6 mb-4'; // Bootstrap classes
+            li.className = 'col-lg-4 col-md-6 mb-4'; // Bootstrap classes for grid layout
 
             const card = document.createElement('div');
             card.className = 'card h-100';
 
             const img = document.createElement('img');
-            img.src = event.images[0].url;
-            img.alt = event.name;
+            img.src = event.images?.[0]?.url || 'default-image.jpg'; // This code uses a default image if not available
+            img.alt = event.name || 'Event Image';
             img.className = 'card-img-top';
             card.appendChild(img);
 
@@ -36,26 +25,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const name = document.createElement('h5');
             name.className = 'card-title';
-            name.textContent = event.name;
+            name.textContent = event.name || 'No name available';
             cardBody.appendChild(name);
 
             const date = document.createElement('p');
             date.className = 'card-text';
-            date.textContent = `Date: ${event.dates.start.localDate}`;
+            date.textContent = `Date: ${event.dates?.start?.localDate || 'Date not available'}`;
             cardBody.appendChild(date);
 
             const time = document.createElement('p');
             time.className = 'card-text';
-            time.textContent = `Time: ${event.dates.start.localTime}`;
+            time.textContent = `Time: ${event.dates?.start?.localTime || 'Time not available'}`;
             cardBody.appendChild(time);
 
             const venue = document.createElement('p');
             venue.className = 'card-text';
-            venue.textContent = `Location: ${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.name}`;
+            venue.textContent = `Location: ${event._embedded?.venues?.[0]?.name || 'Venue not available'}, ${event._embedded?.venues?.[0]?.city?.name || ''}, ${event._embedded?.venues?.[0]?.state?.name || ''}`;
             cardBody.appendChild(venue);
 
             const url = document.createElement('a');
-            url.href = event.url;
+            url.href = event.url || '#';
             url.className = 'btn btn-primary';
             url.textContent = "Buy Tickets";
             url.target = "_blank";
@@ -67,22 +56,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // Filter events by location and date
+    const fetchEvents = () => {
+        fetch('events_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const events = data._embedded.events;
+                displayEvents(events);
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    };
+
     const filterEvents = () => {
-        const userLocation = userLocationInput.value.toLowerCase();
+        const userVenue = userVenueInput.value.toLowerCase();
         const filterDate = filterDateInput.value;
 
-        fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=WGglwpWGVQbbLvFl9Ugw2niwCCWQ34sZ&size=50')
+        fetch('events_data.json')
             .then(response => response.json())
             .then(data => {
                 let events = data._embedded.events;
                 events = events.filter(event => {
-                    const venue = event._embedded.venues[0];
-                    const city = venue.city.name.toLowerCase();
-                    const state = venue.state.name.toLowerCase();
-                    const isLocationMatch = userLocation ? city.includes(userLocation) || state.includes(userLocation) : true;
+                    const venueName = event._embedded?.venues[0]?.name?.toLowerCase() || '';
+                    const isVenueMatch = userVenue ? venueName.includes(userVenue) : true;
                     const isDateMatch = filterDate ? event.dates.start.localDate === filterDate : true;
-                    return isLocationMatch && isDateMatch;
+                    return isVenueMatch && isDateMatch;
                 });
                 displayEvents(events);
             })
@@ -91,6 +87,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     filterButton.addEventListener('click', filterEvents);
 
-    // Load and display events on page load
-    fetchEvents();
+    fetchEvents(); // Load and display events on page load
 });

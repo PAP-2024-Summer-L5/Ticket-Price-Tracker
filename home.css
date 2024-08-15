@@ -1,0 +1,113 @@
+body {
+    background-color: black;
+ } 
+ 
+ /* Nav bar coding below ======================================= */
+ 
+ header {
+     background-color: black;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     box-shadow: 0px 0px 10px black;
+     width: 100%
+ }
+ 
+ footer {
+     min-width: 100%; 
+     min-height: 100%;
+     background: black;
+ }
+ 
+ footer > h3 {
+     color: #453114;
+     font-size:90px;
+     font-family: courier, sans-serif;
+     font-weight: bold;
+     text-align: center;
+ }
+ 
+ footer > div {
+     text-align: center;
+     padding: 2%;
+ }
+ 
+ 
+ 
+ .home {
+     font-size: 35px;
+     margin-left: 10px; 
+     padding-top: 2px;
+     padding-bottom: 5px;
+     font-family: courier, sans-serif;
+     text-decoration: none;
+     color: white;
+ }
+
+ nav {
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav a {
+    font-family: courier, sans-serif;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 30px;
+    position: relative;
+}
+
+#nav-bar > img {
+    max-width: 5px;
+}
+
+nav a:hover {
+    background: whitesmoke;
+    color: black;
+}
+/* End of Nav bar coding */
+
+/* Code for Hero Page === Home*/
+
+/* == Code for video == */
+#video {
+    max-width: auto;
+}
+#heroVideo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: -1; 
+  }
+
+#herotitle {
+    color: white;
+    font-size:90px;
+    font-family: courier, sans-serif;
+    font-weight: bold;
+    text-align: center;
+} 
+
+#herosubheader{
+    color: white;
+    font-size:40px;
+    font-family:courier, sans-serif;
+    text-align: center;
+}
+
+/* End of heropage coding */

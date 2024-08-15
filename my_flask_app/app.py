@@ -6,8 +6,20 @@ import requests
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return render_template('artist.html')
+def search():
+    return render_template('search.html')
+
+@app.route('/events')
+def events():
+    return render_template('events.html')
+
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
+
+@app.route('/create')
+def create():
+    return render_template('createEvents.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():

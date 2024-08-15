@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => console.error('Error fetching events:', error));
     };
-
+// ==== Code for filtering events
     const filterEvents = () => {
         const userVenue = userVenueInput.value.toLowerCase();
         const filterDate = filterDateInput.value;

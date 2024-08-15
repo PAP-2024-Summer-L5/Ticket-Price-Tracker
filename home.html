@@ -2,38 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jam Pass Home</title>
-    <link rel = "stylesheet" href="finalproject.css">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Jampass</title>
+    <link rel="stylesheet" href="home.css" />
 </head>
-<body>
-    <header>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="location.html">Location</a></li>
-            <li><a href="events.html">Events</a></li>
-            <li><a href="artist.html">Artists</a></li>
-            <li><a href =>Support</a></li>
-            <li><a href="aboutus.html">About us</a></li>
-        </ul>
-    </header>
-    <main>
-    <h1 id="logo">JAM PASS</h1>
-    <p id="paragraph">Jam Pass is a dynamic ticket-buying platform designed to make it easy for users to purchase tickets for concerts and events, 
-        whether they're happening nearby or feature one of their favorite artists. With a user-friendly interface, Jam Pass allows 
-        music lovers to discover upcoming shows based on their location or by following specific artists they love. The platform keeps users 
-        informed about the latest events and ensures they never miss out on the chance to see their favorite performers live.</p>
-        <h id="filter">  Filter: </h1>
-            <div id="images">
-                <li><a href="location.html"><img src ="location-image.jpg" id="location-image"></a></li>
-                <li><a href="events.html"><img src ="events-image.jpg" id="events-image"></a></li>
-                <li><a href="artist.html"><img src ="Drake.jpg" id="artist-image"></a></li>
 
+<body>
+<!-- Code for nav bar -->
+    <header>
+        <div class = "nav-bar">
+            <a class="home" href="home.html">Jampass</a>
+            <nav>
+                <ul>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="createEvents.html">Create Events</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+
+        <!-- === Code for heropage === -->
+
+        <div id ="heropage">
+            <h1 id = "herotitle">"Discover excitement"</h1>
+            <h2 id = "herosubheader">One search away from sharing music events with friends!</h2>
+            <!-- Div for video -->
+                <div id = "video"> 
+                    <video autoplay loop id="heroVideo">
+                        <source src="images/Videos/heroPage.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
-    </main>
-            
-        <footer id="footer-home">
-                <p>Trade Mark @ Jam Pass</p>
-        </footer>    
-</body>
-</html>
+
+        </main>
+        <footer>
+            <!-- <p>Trade Mark @ Jam Pass</p> -->
+        </footer>
+    
+    <script></script>
+    
+    </body>
+    </html>

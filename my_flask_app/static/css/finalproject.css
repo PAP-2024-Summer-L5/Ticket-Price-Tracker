@@ -39,17 +39,25 @@ body{
   background-color: #710e9b;
 }
 
+main {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 form {
   background-color: #4654e1;
-  width: 500px;
-  height: 44px;
+  text-align: center;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   position:center;
-  margin-top: 400px;
-  margin-left: 600px;
+  max-width: 800px;
+  margin-top: 350px;
 }
 
 input {
